@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
 import { DialogFooter } from '@fluentui/react/lib/Dialog';
-import { Modal } from '@fluentui/react/lib/Modal';
 import { spfi, SPFx } from '@pnp/sp';
 import Form from '@rjsf/fluent-ui';
 import validator from '@rjsf/validator-ajv8';
 
-import type { RJSFSchema } from '@rjsf/utils';
 import type { ApplicationCustomizerContext } from '@microsoft/sp-application-base';
+import type { RJSFSchema } from '@rjsf/utils';
 
 import '@pnp/sp/sites';
 import '@pnp/sp/user-custom-actions';
@@ -18,46 +17,16 @@ import { Log } from '@microsoft/sp-core-library';
 type CustomActionsProps = {
   context: ApplicationCustomizerContext;
   id: string;
+  onDismiss?: () => void;
+  schema: RJSFSchema;
 };
 
-const schema: RJSFSchema = {
-  title: strings.FormHeading,
-  type: 'object',
-  properties: {
-    title: {
-      type: 'string',
-      title: strings.FormLabelDialogTitle,
-    },
-    message: {
-      type: 'string',
-      title: strings.FormLabelMessage,
-    },
-    button: {
-      type: 'string',
-      title: strings.FormLabelButton,
-    },
-    rules: {
-      type: 'array',
-      title: strings.FormLabelRules,
-      items: {
-        type: 'object',
-        properties: {
-          source: {
-            type: 'string',
-            title: strings.FormLabelSourceURL,
-          },
-          destination: {
-            type: 'string',
-            title: strings.FormLabelDestinationURL,
-          },
-        },
-      },
-    },
-  },
-};
-
-export const CustomActionForm = ({ context, id }: CustomActionsProps): JSX.Element => {
-  const [hidden, setHidden] = useState(false);
+export const CustomActionForm = ({
+  context,
+  id,
+  schema,
+  onDismiss,
+}: CustomActionsProps): JSX.Element => {
   const [properties, setProperties] = useState<object>();
 
   const fetchCustomActions = async (): Promise<void> => {
@@ -91,7 +60,9 @@ export const CustomActionForm = ({ context, id }: CustomActionsProps): JSX.Eleme
       ClientSideComponentProperties: stringifiedProperties,
     });
 
-    setHidden(true);
+    if (onDismiss) {
+      onDismiss();
+    }
   };
 
   useEffect(() => {
@@ -99,13 +70,7 @@ export const CustomActionForm = ({ context, id }: CustomActionsProps): JSX.Eleme
   }, []);
 
   return (
-    <Modal
-      isOpen={!hidden}
-      styles={{
-        main: { padding: '2rem', minWidth: '600px', minHeight: '600px' },
-        scrollableContent: { overflowX: 'hidden', height: '100%' },
-      }}
-    >
+    <>
       <Form
         schema={schema}
         formData={properties}
@@ -118,13 +83,15 @@ export const CustomActionForm = ({ context, id }: CustomActionsProps): JSX.Eleme
         }}
       />
 
-      <DialogFooter styles={{ actions: { clear: 'both', marginBlockStart: '1rem' } }}>
+      <DialogFooter styles={{ actions: { clear: 'both', marginBlockStart: '3rem' } }}>
         <PrimaryButton onClick={onSave}>{strings.FormButtonSave}</PrimaryButton>
-        <DefaultButton onClick={() => setHidden(true)} type="button">
-          {strings.FormButtonCancel}
-        </DefaultButton>
+        {onDismiss && (
+          <DefaultButton onClick={() => onDismiss()} type="button">
+            {strings.FormButtonCancel}
+          </DefaultButton>
+        )}
       </DialogFooter>
-    </Modal>
+    </>
   );
 };
 
