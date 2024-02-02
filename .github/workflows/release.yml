@@ -22,7 +22,7 @@ jobs:
       zipped-package: ${{ steps.set-zipped-package.outputs.zipped-package }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get package-solution.json
         id: package-solution-json
@@ -58,7 +58,7 @@ jobs:
     needs: [setup, build]
     steps:
       - name: Download package
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: package
 
