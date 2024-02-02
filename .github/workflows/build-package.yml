@@ -3,11 +3,6 @@ name: Build and package
 on:
   workflow_call:
     inputs:
-      node-version:
-        description: The version of Node to uses
-        default: '18.19.0'
-        required: false
-        type: string
       zipped-package:
         description: Path to sppkg file
         required: false
@@ -24,7 +19,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version-file: 'package.json'
           cache: npm
 
       - name: Install dependencies
