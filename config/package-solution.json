@@ -3,23 +3,23 @@
   "solution": {
     "name": "spfx-redirect-extension-client-side-solution",
     "id": "c3c482b6-8544-4fa7-909e-ef8754edc432",
-    "version": "1.0.0.0",
+    "version": "0.1.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
-      "websiteUrl": "",
-      "privacyUrl": "",
-      "termsOfUseUrl": "",
+      "name": "Habanero Consulting Inc.",
+      "websiteUrl": "https://www.habaneroconsulting.com",
+      "privacyUrl": "https://www.habaneroconsulting.com/privacy-policy",
+      "termsOfUseUrl": "https://www.habaneroconsulting.com/terms-of-use",
       "mpnId": "Undefined-1.18.2"
     },
     "metadata": {
       "shortDescription": {
-        "default": "spfx-redirect-extension description"
+        "default": "A dialog to help redirect users to newer pages."
       },
       "longDescription": {
-        "default": "spfx-redirect-extension description"
+        "default": "The Redirect Extension allows authors to define dynamic rules on how to redirect users to migrated sites or pages."
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -32,10 +32,7 @@
         "id": "8c744c23-efd6-44ff-9242-a18f97ae7ec4",
         "version": "1.0.0.0",
         "assets": {
-          "elementManifests": [
-            "elements.xml",
-            "ClientSideInstance.xml"
-          ]
+          "elementManifests": ["elements.xml", "ClientSideInstance.xml"]
         }
       }
     ]

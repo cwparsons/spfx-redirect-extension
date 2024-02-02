@@ -4,6 +4,6 @@
         Title="RedirectExtension"
         Location="ClientSideExtension.ApplicationCustomizer"
         ComponentId="ef99976f-a99e-468a-80c3-53da3f7f49e9"
-        Properties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+        Properties="{&quot;title&quot;:&quot;Redirect notice&quot;, &quot;message&quot;:&quot;This site has moved.&quot;, {&quot;button&quot;:&quot;Go to the new site&quot;, &quot;rules&quot;: []}">
     </ClientSideComponentInstance>
 </Elements>

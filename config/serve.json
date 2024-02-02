@@ -4,26 +4,8 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
-      "customActions": {
-        "ef99976f-a99e-468a-80c3-53da3f7f49e9": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {
-            "testMessage": "Test message"
-          }
-        }
-      }
-    },
-    "redirectExtension": {
-      "pageUrl": "https://{tenantDomain}/SitePages/myPage.aspx",
-      "customActions": {
-        "ef99976f-a99e-468a-80c3-53da3f7f49e9": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {
-            "testMessage": "Test message"
-          }
-        }
-      }
+      "pageUrl": "https://{tenantDomain}/SitePages/Home.aspx"
     }
   }
 }
+
