@@ -31,19 +31,19 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=json::$content"
+          echo "json=$content" >> $GITHUB_OUTPUT
 
       - name: Output zipped-package
         id: set-zipped-package
         run: |
-          echo "::set-output name=zipped-package::${{ fromJson(steps.package-solution-json.outputs.json).paths.zippedPackage }}"
+          echo "zipped-package=${{ fromJson(steps.package-solution-json.outputs.json).paths.zippedPackage }}" >> $GITHUB_OUTPUT
 
       - name: Output package
         id: set-package
         run: |
           filepath="${{ steps.set-zipped-package.outputs.zipped-package }}"
           filename=${filepath##*/}
-          echo "::set-output name=package::$filename"
+          echo "package=$filename" >> $GITHUB_OUTPUT
 
   build:
     name: Release build
