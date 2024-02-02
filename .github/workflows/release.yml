@@ -27,16 +27,14 @@ jobs:
       - name: Get package-solution.json
         id: package-solution-json
         run: |
-          content=`cat ./config/package-solution.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "json=$content" >> $GITHUB_OUTPUT
+          echo "config<<EOF" >> $GITHUB_OUTPUT
+          cat ./config/package-solution.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Output zipped-package
         id: set-zipped-package
         run: |
-          echo "zipped-package=${{ fromJson(steps.package-solution-json.outputs.json).paths.zippedPackage }}" >> $GITHUB_OUTPUT
+          echo "zipped-package=${{ fromJson(steps.package-solution-json.outputs.config).paths.zippedPackage }}" >> $GITHUB_OUTPUT
 
       - name: Output package
         id: set-package
